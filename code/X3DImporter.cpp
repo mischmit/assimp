@@ -281,7 +281,7 @@ void X3DImporter::XML_CheckNode_MustBeEmpty()
 
 void X3DImporter::XML_CheckNode_SkipUnsupported(const std::string& pParentNodeName)
 {
-    static const size_t Uns_Skip_Len = 192;
+    static const size_t Uns_Skip_Len = 193;
     const char* Uns_Skip[ Uns_Skip_Len ] = {
 	    // CAD geometry component
 	    "CADAssembly", "CADFace", "CADLayer", "CADPart", "IndexedQuadSet", "QuadSet",
@@ -329,7 +329,7 @@ void X3DImporter::XML_CheckNode_SkipUnsupported(const std::string& pParentNodeNa
 	    // Pointing device sensor component
 	    "CylinderSensor", "PlaneSensor", "SphereSensor", "TouchSensor",
 	    // Rendering component
-	    "ClipPlane",
+	    "ClipPlane", "IndexedPointSet",
 	    // Rigid body physics
 	    "BallJoint", "CollidableOffset", "CollidableShape", "CollisionCollection", "CollisionSensor", "CollisionSpace", "Contact", "DoubleAxisHingeJoint",
 	    "MotorJoint", "RigidBody", "RigidBodyCollection", "SingleAxisHingeJoint", "SliderJoint", "UniversalJoint",
@@ -388,6 +388,7 @@ void X3DImporter::XML_CheckNode_SkipUnsupported(const std::string& pParentNodeNa
 
 casu_cres:
 
+    
 	if(!found) throw DeadlyImportError("Unknown node \"" + nn + "\" in " + pParentNodeName + ".");
 
 	if(close_found)

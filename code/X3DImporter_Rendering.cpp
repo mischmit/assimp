@@ -199,6 +199,16 @@ void X3DImporter::ParseNode_Rendering_IndexedLineSet()
 	}
 	else
 	{
+        if (coordIndex.size() == 0)
+        {
+            // Just ignore those.
+            if (!mReader->isEmptyElement())
+            {
+                MACRO_NODECHECK_LOOPBEGIN("IndexedLineSet");
+                MACRO_NODECHECK_LOOPEND("IndexedLineSet");
+            }
+            return;
+        }
 		// check data
 		if((coordIndex.size() < 2) || ((coordIndex.back() == (-1)) && (coordIndex.size() < 3)))
 			throw DeadlyImportError("IndexedLineSet must contain not empty \"coordIndex\" attribute.");
@@ -395,8 +405,18 @@ void X3DImporter::ParseNode_Rendering_IndexedTriangleSet()
 	}
 	else
 	{
-		// check data
-		if(index.size() == 0) throw DeadlyImportError("IndexedTriangleSet must contain not empty \"index\" attribute.");
+
+        // check data
+        if (index.size() == 0)
+        {
+            // Just ignore those.
+            if (!mReader->isEmptyElement())
+            {
+                MACRO_NODECHECK_LOOPBEGIN("IndexedTriangleSet");
+                MACRO_NODECHECK_LOOPEND("IndexedTriangleSet");
+            }
+            return;
+        }
 
 		// create and if needed - define new geometry object.
 		ne = new CX3DImporter_NodeElement_IndexedSet(CX3DImporter_NodeElement::ENET_IndexedTriangleSet, NodeElement_Cur);
